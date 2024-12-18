@@ -256,6 +256,7 @@ df = df.dropna()""", language="python")
 # 4.1
 st.write("### 4.1. Variable Summary:")
 
+st.image(r"pic\variable_summary.png")
 st.write("The dataset consists of customer attributes and behaviors, showing notable variability in financial balances, call durations, and previous campaign contacts. Key observations include:")
 
 st.write("- **Age**: Skewed toward younger adults, with a mean of 41.")
@@ -268,7 +269,7 @@ st.write("⇒ This suggests that variables like duration, balance, and previous 
 
 # 4.2
 st.write("### 4.2. Correlation Matrix:")
-
+st.image(r"pic\corr_matrix.png")
 st.write("The correlation matrix highlights the relationships between variables:")
 
 st.write("- **Strongest Correlations**: Duration shows a significant positive correlation with the outcome variables (poutcome_success and deposit), confirming its importance as a predictor.")
@@ -280,8 +281,8 @@ st.write("⇒ In summary, duration remains the most influential variable, while 
 
 # 4.3
 st.write("### 4.3. Visualizing Data with Principal Components:")
-
-st.write("We can see that the first principal component (PC1) is a strong discriminator between the two categories. It appears that higher values of PC1 are associated with \"not deposit\" cases, while lower values are associated with \"deposit\" cases.")
+st.image(r"pic\visualization.png")
+st.write("**=> We can see that the first principal component (PC1) is a strong discriminator between the two categories. It appears that higher values of PC1 are associated with \"not deposit\" cases, while lower values are associated with \"deposit\" cases.**")
 
 # V. Logistic Regression Model
 st.header("V. Logistic Regression Model")
