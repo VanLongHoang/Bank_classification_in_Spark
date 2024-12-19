@@ -1,26 +1,97 @@
 import streamlit as st
 import pandas as pd
 
+import streamlit as st
+
+# Define custom CSS to hide the Streamlit header and footer
+hide_streamlit_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    </style>
+"""
+
+# Inject custom CSS to hide Streamlit UI elements
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
 # Custom HTML for header and footer
-header_html = """
-    <div style="position: fixed; top: 0; width: 50%; background-color: black; z-index: 9999; border-bottom: 1px solid #ddd;">
+footer_html = """
+    <div style="position: fixed; bottom: 0; width: 50%; background-color: black; z-index: 9999; border-bottom: 1px solid #ddd;">
         <div style="max-width: 100%; margin: 0 auto; padding: 10px 0;">
-            <h4 style="text-align: center; color: #FFD700; margin: 0; padding: 1px 0;"></h4>
-            <h4 style="text-align: center; color: #FFD700; margin: 0; padding: 1px 0;"></h4>
-            <h4 style="text-align: center; color: #FFD700; margin: 0; padding: 1px 0;">VIETNAM NATIONAL UNIVERSITY OF HO CHI MINH CITY</h4>
-            <h4 style="text-align: center; color: #FFD700; margin: 0; padding: 1px 0;">INTERNATIONAL UNIVERSITY</h4>
-            <h4 style="text-align: center; color: #FFD700; margin: 0; padding: 1px 0;">SCHOOL OF COMPUTER SCIENCE AND ENGINEERING</h4>
+            <h5 style="text-align: center; color: #FFD700; margin: 0; padding: 1px 0;">VIETNAM NATIONAL UNIVERSITY OF HO CHI MINH CITY - INTERNATIONAL UNIVERSITY</h4>
+            <h5 style="text-align: center; color: #FFD700; margin: 0; padding: 1px 0;">SCHOOL OF COMPUTER SCIENCE AND ENGINEERING</h4>
         </div>
     </div>
     <br><br><br><br><br>
 """
 
-# Inject custom HTML for header and footer
-st.markdown(header_html, unsafe_allow_html=True)
+# Custom HTML for the title
+title_html = """
+    <h1 style="color: green; text-align: center;">
+        Bank Marketing Dataset Report
+    </h1>
+"""
+
+# Display the custom HTML for the title
+st.markdown(title_html, unsafe_allow_html=True)
+
+st.write("Welcome to the Bank Marketing Dataset Report. This project delves into a comprehensive analysis of a bank marketing dataset, exploring various attributes and behaviors of customers. By examining key variables such as age, financial balances, call durations, and campaign contacts, we aim to uncover critical insights and predictors of customer outcomes. Through meticulous data preprocessing, exploratory data analysis, and advanced visualization techniques, this report offers a deep understanding of the factors influencing customer behavior and the effectiveness of marketing strategies. Join us as we navigate through the data to reveal patterns and trends that drive successful marketing campaigns.")
+
+import streamlit as st
+
+# Create a 4 columns by 3 rows table
+table_html = """
+    <table style="width:100%; border: 1px solid black; border-collapse: collapse;">
+        <tr>
+            <th style="border: 1px solid black;">Name</th>
+            <th style="border: 1px solid black;">ID</th>
+            <th style="border: 1px solid black;">Contribution</th>
+            <th style="border: 1px solid black;">Note</th>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">Hoang Van Long</td>
+            <td style="border: 1px solid black;">ITDSIU21096</td>
+            <td style="border: 1px solid black;">Organizing data, plans, code lab report, preprocessing</td>
+            <td style="border: 1px solid black;"></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">Do Minh Hieu</td>
+            <td style="border: 1px solid black;">ITDSIU21086</td>
+            <td style="border: 1px solid black;">Training model</td>
+            <td style="border: 1px solid black;"></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid black;">Nguyen Mai Anh Nam</td>
+            <td style="border: 1px solid black;">ITDSIU21102</td>
+            <td style="border: 1px solid black;">Building application</td>
+            <td style="border: 1px solid black;"></td>
+        </tr>
+    </table>
+"""
+
+# Display the table
+st.markdown(table_html, unsafe_allow_html=True)
 
 # Read the main csv file
 df = pd.read_csv('bank.csv')
 
+# Define the sections
+sections = {
+    "I. Introduction": "#introduction",
+    "II. Data Collecting and Manipulation": "#section1",
+    "III. Exploratory Data Analysis (EDA)": "#section2",
+    "IV. Data Preprocessing": "#section3",
+    "V. Model Development": "#section4",
+    "VI. Application": "#section5",
+    "VII. References": "#references"
+}
+
+# Create the Table of Contents at the top
+st.title("Table of Contents")
+for section, link in sections.items():
+    st.markdown(f"[{section}]({link})")
+    
 # I. Introduction
 introduction = {
     "Overview": {
@@ -69,9 +140,8 @@ introduction = {
 }
 
 # Set up the UI
-st.title("Bank Marketing Dataset Report")
+st.markdown("<a name='introduction'></a>", unsafe_allow_html=True)
 st.header("I. Introduction")
-
 # Display Overview section
 st.subheader("1.1. Overview")
 st.write("**Dataset:**", introduction["Overview"]["Dataset"])
@@ -122,8 +192,8 @@ dataCollectionAndManipulation = {
 }
 
 # Displaying the UI for section II
+st.markdown("<a name='section1'></a>", unsafe_allow_html=True)
 st.header("II. Data Collecting and Manipulation")
-
 # Display Read Data section
 st.subheader("2.1. Read Data")
 st.write("**Dataset:**")
@@ -185,6 +255,7 @@ exploratoryDataAnalysis = {
 }
 
 # Displaying the UI for section III
+st.markdown("<a name='section2'></a>", unsafe_allow_html=True)
 st.header("III. Exploratory Data Analysis (EDA)")
 st.subheader("3.1. Assess the level of \"customer attrition\" in the dataset:")
 st.write("**What is \'customer attrition\'?**")
@@ -214,8 +285,8 @@ st.write(exploratoryDataAnalysis["Variables distribution in customer attrition"]
 
 # IV.	Data Preprocessing:
 # Displaying the UI for section IV
-st.header("IV. Data Preprocessing:")
-
+st.markdown("<a name='section3'></a>", unsafe_allow_html=True)
+st.header("IV. Data Preprocessing")
 st.write("**- In this step, I used scikit-learn to process data:**")
 st.write("- Customer ID and target column")
 st.code("""#customer id col
@@ -285,6 +356,7 @@ st.image(r"pic\visualization.png")
 st.write("**=> We can see that the first principal component (PC1) is a strong discriminator between the two categories. It appears that higher values of PC1 are associated with \"not deposit\" cases, while lower values are associated with \"deposit\" cases.**")
 
 # V. Logistic Regression Model
+st.markdown("<a name='section4'></a>", unsafe_allow_html=True)
 st.header("V. Logistic Regression Model")
 
 # 5.1 Initializing Spark Session
@@ -402,8 +474,11 @@ st.write("""
 The logistic regression model demonstrates excellent predictive capabilities, with near-perfect accuracy, precision, and recall. This indicates the model generalizes well to unseen data and is suitable for production use.
 """)
 
+# VI. UI
+st.markdown("<a name='section5'></a>", unsafe_allow_html=True)
+st.header("VI. Application")
+
 # 6.1 Predict function
-st.header("VI. Prediction:")
 st.subheader("**`predict_churn(customer_data)` Function**")
 st.code( """ def predict_churn(customer_data):
 # Preprocess customer data (e.g., feature scaling, encoding)
@@ -452,6 +527,7 @@ reference = {
     3 : "3. https://timo.vn/tai-khoan-tiet-kiem/khi-nao-nen-su-dung-goal-save-va-term-deposit/",
     4 : "4. https://www.geeksforgeeks.org/understanding-logistic-regression/"
 }
+st.markdown("<a name='references'></a>", unsafe_allow_html=True)
 st.header("VII. References")
 st.write(reference[1])
 st.write(reference[2])
