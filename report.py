@@ -93,6 +93,14 @@ st.title("Table of Contents")
 for section, link in sections.items():
     st.markdown(f"[{section}]({link})")
     
+# Function to create styled header
+def styled_header(text):
+    html_header = f"""
+        <h2 style="color: gold;">{text}</h2>
+    """
+    st.markdown(html_header, unsafe_allow_html=True)
+
+
 # I. Introduction
 introduction = {
     "Overview": {
@@ -142,7 +150,7 @@ introduction = {
 
 # Set up the UI
 st.markdown("<a name='introduction'></a>", unsafe_allow_html=True)
-st.header("I. Introduction")
+styled_header("I. Introduction")
 # Display Overview section
 st.subheader("1.1. Overview")
 st.write("**Dataset:**", introduction["Overview"]["Dataset"])
@@ -194,7 +202,7 @@ dataCollectionAndManipulation = {
 
 # Displaying the UI for section II
 st.markdown("<a name='section1'></a>", unsafe_allow_html=True)
-st.header("II. Data Collecting and Manipulation")
+styled_header("II. Data Collecting and Manipulation")
 # Display Read Data section
 st.subheader("2.1. Read Data")
 st.write("**Dataset:**")
@@ -258,7 +266,7 @@ exploratoryDataAnalysis = {
 
 # Displaying the UI for section III
 st.markdown("<a name='section2'></a>", unsafe_allow_html=True)
-st.header("III. Exploratory Data Analysis (EDA)")
+styled_header("III. Exploratory Data Analysis (EDA)")
 st.subheader("3.1. Assess the level of \"customer attrition\" in the dataset:")
 st.write("**What is \'customer attrition\'?**")
 st.image(exploratoryDataAnalysis["Assess the level of \"customer attrition\" in the dataset"]["What is 'customer attrition'?"])
@@ -288,7 +296,7 @@ st.write(exploratoryDataAnalysis["Variables distribution in customer attrition"]
 # IV.	Data Preprocessing:
 # Displaying the UI for section IV
 st.markdown("<a name='section3'></a>", unsafe_allow_html=True)
-st.header("IV. Data Preprocessing")
+styled_header("IV. Data Preprocessing")
 st.write("**- In this step, I used scikit-learn to process data:**")
 st.write("- Customer ID and target column")
 st.code("""#customer id col
@@ -359,7 +367,7 @@ st.write("**=> We can see that the first principal component (PC1) is a strong d
 
 # V. Logistic Regression Model
 st.markdown("<a name='section4'></a>", unsafe_allow_html=True)
-st.header("V. Model Development")
+styled_header("V. Model Development")
 
 # 5.1 Initializing Spark Session
 st.subheader("5.1 Initializing Spark Session")
@@ -490,7 +498,7 @@ The logistic regression model demonstrates excellent predictive capabilities, wi
 
 # VI. UI
 st.markdown("<a name='section5'></a>", unsafe_allow_html=True)
-st.header("VI. Application")
+styled_header("VI. Application")
 
 # 6.1 Predict function
 st.subheader("**`predict_churn(customer_data)` Function**")
@@ -539,7 +547,7 @@ st.write( """This Streamlit app demonstrates a practical application of machine 
 
 # 7 Conclusion:
 st.markdown("<a name='section6'></a>", unsafe_allow_html=True)
-st.header("VII. Conclusion")
+styled_header("VII. Conclusion")
 st.write("This project demonstrated the effective use of Spark's MLlib for scalable machine learning on big data. By implementing logistic regression, we highlighted Spark's ability to handle large datasets efficiently. These techniques provided valuable insights and predictions, showcasing the potential for real-world applications.")
 st.write("Through this project, we learned how to process and analyze big data using distributed computing, build and evaluate machine learning models at scale, and interpret results to derive actionable insights. Future work could explore streaming data integration and advanced model optimization.")
 
@@ -552,7 +560,7 @@ reference = {
     5 : "5. https://www.geeksforgeeks.org/understanding-logistic-regression/"
 }
 st.markdown("<a name='references'></a>", unsafe_allow_html=True)
-st.header("VIII. References")
+styled_header("VIII. References")
 st.write(reference[1])
 st.write(reference[2])
 st.write(reference[3])
