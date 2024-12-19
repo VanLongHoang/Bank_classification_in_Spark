@@ -401,3 +401,59 @@ st.write("""
 **Summary**:  
 The logistic regression model demonstrates excellent predictive capabilities, with near-perfect accuracy, precision, and recall. This indicates the model generalizes well to unseen data and is suitable for production use.
 """)
+
+# 6.1 Predict function
+st.header("VI. Prediction:")
+st.subheader("**`predict_churn(customer_data)` Function**")
+st.code( """ def predict_churn(customer_data):
+# Preprocess customer data (e.g., feature scaling, encoding)
+processed_data = preprocess_data(customer_data)
+# Make prediction using the trained model
+prediction = trained_model.predict(processed_data)
+# Determine churn probability
+churn_probability = prediction[0]
+return churn_probability
+""", language="python" )
+st.write( """ * **Data Preprocessing:** Transforms the raw customer data into a format suitablefor
+the machine learning model. This may involve scaling numerical features, encoding
+categorical variables, and handling missing values. * **Model Prediction:** Utilizes a pre-trained machine learning model (e.g., a logisticregression model, a decision tree, or a neural network) to predict the probability of the
+customer churning. * **Probability Calculation:** Extracts the predicted churn probability fromthe model'soutput. """ )
+# 6.2 main function
+st.subheader("**`main()` Function**")
+st.code(""" def main():
+st.title("Customer Churn Prediction")
+# User input fields for customer data
+customer_age = st.number_input("Customer Age", min_value=18)
+monthly_bill = st.number_input("Monthly Bill")
+customer_tenure = st.number_input("Customer Tenure (months)")
+# ... other relevant input fields ... if st.button("Predict Churn"):
+customer_data = {
+"age": customer_age, "monthly_bill": monthly_bill, "tenure": customer_tenure, # ... other data fields ... }
+churn_probability = predict_churn(customer_data)
+st.write(f"Predicted Churn Probability: {churn_probability:.2%}")
+if churn_probability > 0.5:
+st.warning("High risk of customer churn.")
+else:
+st.success("Low risk of customer churn.") """, language="python" )
+st.write(""" * **User Interface:** Creates an interactive interface using Streamlit components like`st.number_input` to allow users to input customer data. * **Prediction Trigger:** Initiates the churn prediction process when the "Predict
+Churn" button is clicked. * **Result Display:** Displays the predicted churn probability in a clear and conciseformat. * **Risk Assessment:** Provides a visual cue (warning/success) to quickly conveythelevel of churn risk. """)
+# 6.3 functionality
+st.subheader("Functionality")
+st.write(""" * **Data Input:** Users provide customer data through interactive input fields. * **Churn Prediction:** The app predicts the likelihood of a customer churning basedon the provided data and the underlying machine learning model.
+* **Risk Assessment:** The app provides a visual cue (warning/success) to indicatethelevel of churn risk, enabling users to quickly identify customers requiring immediate attention. """)
+# 6.4 conclusion
+st.subheader("Conclusion")
+st.write( """This Streamlit app demonstrates a practical application of machine learningforcustomer churn prediction. By providing valuable insights and actionable recommendations, the app can assist businesses in improving customer retention and overall profitability. """)
+
+# 7 References:
+reference = {
+    1 : "1. [Moro et al., 2014] S. Moro, P. Cortez and P. Rita. A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems, Elsevier, 62:22-31, June 2014.",
+    2 : "2. https://www.kaggle.com/datasets/janiobachmann/bank-marketing-dataset/data",
+    3 : "3. https://timo.vn/tai-khoan-tiet-kiem/khi-nao-nen-su-dung-goal-save-va-term-deposit/",
+    4 : "4. https://www.geeksforgeeks.org/understanding-logistic-regression/"
+}
+st.header("VII. References")
+st.write(reference[1])
+st.write(reference[2])
+st.write(reference[3])
+st.write(reference[4])
