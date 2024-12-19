@@ -84,7 +84,8 @@ sections = {
     "IV. Data Preprocessing": "#section3",
     "V. Model Development": "#section4",
     "VI. Application": "#section5",
-    "VII. References": "#references"
+    "VII. Conclusion": "#section6",
+    "VIII. References": "#references"
 }
 
 # Create the Table of Contents at the top
@@ -226,6 +227,7 @@ cat_cols = df.nunique()[df.nunique() < 6].keys().tolist()
 cat_cols = [x for x in cat_cols if x not in target_col]
 num_cols = [x for x in df.columns if (x not in cat_cols + target_col + Id_col)]""", language='python')
 
+# III. Data Analysis
 exploratoryDataAnalysis = {
     "Assess the level of \"customer attrition\" in the dataset": {
         "What is \'customer attrition\'?": "pic\deposit&nonDeposit.png",
@@ -357,7 +359,7 @@ st.write("**=> We can see that the first principal component (PC1) is a strong d
 
 # V. Logistic Regression Model
 st.markdown("<a name='section4'></a>", unsafe_allow_html=True)
-st.header("V. Logistic Regression Model")
+st.header("V. Model Development")
 
 # 5.1 Initializing Spark Session
 st.subheader("5.1 Initializing Spark Session")
@@ -387,9 +389,21 @@ train_data, test_data = df_features.randomSplit([0.8, 0.2], seed=1234)
 """, language="python")
 
 # Splitting Data Statistics
-st.write("### Splitting Data Statistic")
-st.write("Training Dataset Count: 8833")  
-st.write("Test Dataset Count: 2189")
+st.write("##### Splitting Data Statistic")
+import streamlit as st
+
+# Define the HTML with inline CSS for light blue color
+training_html = """
+    <div>Training Dataset Count: <span style="color: red;">8833</span></div>
+"""
+test_html = """
+    <div>Test Dataset Count: <span style="color: red;">2189</span></div>
+"""
+
+# Display the HTML content
+st.markdown(training_html, unsafe_allow_html=True)
+st.markdown(test_html, unsafe_allow_html=True)
+
 
 # 5.4 Training Model
 st.subheader("5.4 Training Model")
@@ -510,26 +524,37 @@ if churn_probability > 0.5:
 st.warning("High risk of customer churn.")
 else:
 st.success("Low risk of customer churn.") """, language="python" )
+
+st.image(r"pic\GUI_BIGDATA.png")
 st.write(""" * **User Interface:** Creates an interactive interface using Streamlit components like`st.number_input` to allow users to input customer data. * **Prediction Trigger:** Initiates the churn prediction process when the "Predict
 Churn" button is clicked. * **Result Display:** Displays the predicted churn probability in a clear and conciseformat. * **Risk Assessment:** Provides a visual cue (warning/success) to quickly conveythelevel of churn risk. """)
+
 # 6.3 functionality
 st.subheader("Functionality")
 st.write(""" * **Data Input:** Users provide customer data through interactive input fields. * **Churn Prediction:** The app predicts the likelihood of a customer churning basedon the provided data and the underlying machine learning model.
 * **Risk Assessment:** The app provides a visual cue (warning/success) to indicatethelevel of churn risk, enabling users to quickly identify customers requiring immediate attention. """)
 # 6.4 conclusion
-st.subheader("Conclusion")
+st.subheader("Remark")
 st.write( """This Streamlit app demonstrates a practical application of machine learningforcustomer churn prediction. By providing valuable insights and actionable recommendations, the app can assist businesses in improving customer retention and overall profitability. """)
 
-# 7 References:
+# 7 Conclusion:
+st.markdown("<a name='section6'></a>", unsafe_allow_html=True)
+st.header("VII. Conclusion")
+st.write("This project demonstrated the effective use of Spark's MLlib for scalable machine learning on big data. By implementing logistic regression, we highlighted Spark's ability to handle large datasets efficiently. These techniques provided valuable insights and predictions, showcasing the potential for real-world applications.")
+st.write("Through this project, we learned how to process and analyze big data using distributed computing, build and evaluate machine learning models at scale, and interpret results to derive actionable insights. Future work could explore streaming data integration and advanced model optimization.")
+
+# 8 References:
 reference = {
     1 : "1. [Moro et al., 2014] S. Moro, P. Cortez and P. Rita. A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems, Elsevier, 62:22-31, June 2014.",
     2 : "2. https://www.kaggle.com/datasets/janiobachmann/bank-marketing-dataset/data",
     3 : "3. https://timo.vn/tai-khoan-tiet-kiem/khi-nao-nen-su-dung-goal-save-va-term-deposit/",
-    4 : "4. https://www.geeksforgeeks.org/understanding-logistic-regression/"
+    4 : "4. https://spark.apache.org",
+    5 : "5. https://www.geeksforgeeks.org/understanding-logistic-regression/"
 }
 st.markdown("<a name='references'></a>", unsafe_allow_html=True)
-st.header("VII. References")
+st.header("VIII. References")
 st.write(reference[1])
 st.write(reference[2])
 st.write(reference[3])
 st.write(reference[4])
+st.write(reference[5])
