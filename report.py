@@ -375,12 +375,14 @@ st.code("""
 from pyspark.sql import SparkSession
 spark = SparkSession.builder.appName("LogisticRegressionModel").getOrCreate()
 """, language="python")
+st.write("Creates Spark session to manage cluster resources and distributed processing.")
 
 # 5.2 Reading CSV File Using Spark
 st.subheader("5.2 Reading CSV File Using Spark")
 st.code("""
 df = spark.read.csv("newdata.csv", header=True, inferSchema=True)
 """, language="python")
+st.write("Reads the CSV file into a Spark DataFrame with headers and schema inference.")
 
 # 5.3 Splitting Data
 st.subheader("5.3 Splitting Data")
@@ -395,6 +397,7 @@ df_features = assembler.transform(df).select("features", "label")
 # Split the data
 train_data, test_data = df_features.randomSplit([0.8, 0.2], seed=1234)
 """, language="python")
+st.write("Prepares feature vectors and splits the data into training and test sets.")
 
 # Splitting Data Statistics
 st.write("##### Splitting Data Statistic")
@@ -419,6 +422,7 @@ st.code("""
 lr = LogisticRegression(featuresCol='features', labelCol='label')
 lr_model = lr.fit(train_data)
 """, language="python")
+st.write("Training a logistic regression model using the training data.")
 
 # 5.5 Saving Model
 st.subheader("5.5 Saving Model")
@@ -430,6 +434,7 @@ lr_model.save("lr_model")
 train_data.write.parquet("lr_model/train_data.parquet")
 test_data.write.parquet("lr_model/test_data.parquet")
 """, language="python")
+st.write("Saving the trained model and training/test datasets for future use.")
 
 # 5.6 Prediction
 st.subheader("5.6 Prediction")
@@ -442,6 +447,7 @@ loaded_model = LogisticRegressionModel.load("lr_model")
 predictions = loaded_model.transform(test_data)
 predictions.select("features", "label", "prediction").show()
 """, language="python")
+st.write("Making predictions on the test data using the trained model.")
 
 # 5.7 Evaluation
 st.subheader("5.7 Evaluation")
@@ -533,7 +539,8 @@ st.warning("High risk of customer churn.")
 else:
 st.success("Low risk of customer churn.") """, language="python" )
 
-st.image(r"pic\GUI_BIGDATA.png")
+st.image(r"pic\GUI1.png")
+st.image(r"pic\GUI2.png")
 st.write(""" * **User Interface:** Creates an interactive interface using Streamlit components like`st.number_input` to allow users to input customer data. * **Prediction Trigger:** Initiates the churn prediction process when the "Predict
 Churn" button is clicked. * **Result Display:** Displays the predicted churn probability in a clear and conciseformat. * **Risk Assessment:** Provides a visual cue (warning/success) to quickly conveythelevel of churn risk. """)
 
